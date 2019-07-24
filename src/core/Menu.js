@@ -3,16 +3,8 @@ import {Link,withRouter} from 'react-router-dom'
 
 
 const isActive=(history,path)=>{
-    if(history.location.pathname===path){
-        return {
-            'color':'#ff9900'
-        }
-    }
-    else{
-        return {
-            'color':'white'
-        }
-    }
+    return history.location.pathname===path ? {'color':'#ff9900'} : {'color':'white'}
+    
 }
 const Menu=({history}) =>{
   return (
