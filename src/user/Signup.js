@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import Layout from '../core/Layout'
-// import {API} from '../config'
+import {API} from '../config'
 
 const Signup=() =>{
 const [values,setValues]=useState({
@@ -13,20 +13,35 @@ const [values,setValues]=useState({
 
 const {name,email,password}=values
 
-const signup=(name,email,password)=>{
-  console.log(name,email,password)
+
+const signup=(user)=>{
+  // console.log(name,email,password)
+fetch(`${API}/signup`,{
+  method:"POST",
+  headers:{
+    Accept:"application/json",
+    "Content-Type":"application/json"
+  },
+  body:JSON.stringify(user)
+})
+.then(result=> result.json())
+.then(data=>{
+  console.log(data)
+
+}).catch(err=>{
+  console.log(err)
+})
+
+
 }
 
 const handleChange= name => event=>{
-  if(name==='email'){
-    
-  }
 setValues({...values,error:false,[name]:event.target.value})
 }
 
 const clickSubmit=(event)=>{
-  event.preventDefault()
-  signup(name,email,password)
+  event.preventDefault()//to prevent page reload of browser
+  signup({name,email,password})
 }
 
   const signUpForm=()=>(
@@ -35,6 +50,7 @@ const clickSubmit=(event)=>{
       <div className="form-group">
         <label className='text-muted'>Name</label>
         <input className='form-control' type='text' onChange={handleChange('name')}/>
+        
       </div>
       {/* email */}
       <div className="form-group">
