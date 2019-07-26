@@ -11,12 +11,12 @@ const [values,setValues]=useState({
   success:false
 })
 
-const {name,email,password}=values
+const {name,email,password,error,success}=values
 
 
 const signup=(user)=>{
   // console.log(name,email,password)
-fetch(`${API}/signup`,{
+return fetch(`${API}/signup`,{
   method:"POST",
   headers:{
     Accept:"application/json",
@@ -24,11 +24,10 @@ fetch(`${API}/signup`,{
   },
   body:JSON.stringify(user)
 })
-.then(result=> result.json())
-.then(data=>{
-  console.log(data)
-
-}).catch(err=>{
+.then(result=> {
+  console.log(result)
+  return result.json()})
+.catch(err=>{
   console.log(err)
 })
 
@@ -41,26 +40,48 @@ setValues({...values,error:false,[name]:event.target.value})
 
 const clickSubmit=(event)=>{
   event.preventDefault()//to prevent page reload of browser
-  signup({name,email,password})
+  const data = signup({name,email,password})
+  console.log(data)
+  if(data.error){
+    setValues({...values,error:data.errors,success:false})
+  }
+
+  else{
+    setValues({...values,name:'',email:'',password:'',success:true})
+    
+  }
 }
+
+const showError=()=>(
+   <div className="alert alert-danger" style={{display:error?'':'none'}}>
+    {error}
+  </div>
+)
+
+
+const showSuccess=()=>(
+   <div className="alert alert-info" style={{display:success?'':'none'}}>
+    Signup Successful
+  </div>
+)
 
   const signUpForm=()=>(
     <form>
       {/* name */}
       <div className="form-group">
         <label className='text-muted'>Name</label>
-        <input className='form-control' type='text' onChange={handleChange('name')}/>
+        <input className='form-control' type='text' onChange={handleChange('name')} value={name}/>
         
       </div>
       {/* email */}
       <div className="form-group">
         <label className='text-muted'>Email</label>
-        <input className='form-control' type='Email' onChange={handleChange('email')}/>
+        <input className='form-control' type='Email' onChange={handleChange('email')} value={email}/>
       </div>
 
       <div className="form-group">
         <label className='text-muted'>password</label>
-        <input className='form-control' type='password' onChange={handleChange('password')}/>
+        <input className='form-control' type='password' onChange={handleChange('password')} password={password}/>
       </div>
       <button onClick={clickSubmit} className='btn btn-primary'>Sign Up</button>
     </form>
@@ -68,6 +89,8 @@ const clickSubmit=(event)=>{
   )
 return(
  <Layout title="Signup" description="Node react E-commerce App" className='container col-md-8 offset-2'>
+   {showSuccess()}
+   {showError()}
   {signUpForm()}
   {JSON.stringify(values)}
 </Layout>
