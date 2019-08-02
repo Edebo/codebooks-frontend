@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
+import {Link} from 'react-router-dom'
 import Layout from '../core/Layout'
-import {API} from '../config'
+import {signup} from '../auth/index'
 
 const Signup=() =>{
 const [values,setValues]=useState({
@@ -14,42 +15,28 @@ const [values,setValues]=useState({
 const {name,email,password,error,success}=values
 
 
-const signup=(user)=>{
-  // console.log(name,email,password)
-return fetch(`${API}/signup`,{
-  method:"POST",
-  headers:{
-    Accept:"application/json",
-    "Content-Type":"application/json"
-  },
-  body:JSON.stringify(user)
-})
-.then(result=> {
-  console.log(result)
-  return result.json()})
-.catch(err=>{
-  console.log(err)
-})
-
-
-}
 
 const handleChange= name => event=>{
 setValues({...values,error:false,[name]:event.target.value})
 }
 
+
 const clickSubmit=(event)=>{
   event.preventDefault()//to prevent page reload of browser
-  const data = signup({name,email,password})
-  console.log(data)
+  setValues({...values,error:false})
+ signup({name,email,password}).then(data=>{
+   console.log(data)
   if(data.error){
-    setValues({...values,error:data.errors,success:false})
+    setValues({...values,error:data.error,success:false})
   }
 
   else{
     setValues({...values,name:'',email:'',password:'',success:true})
     
   }
+ })
+
+  
 }
 
 const showError=()=>(
@@ -61,7 +48,7 @@ const showError=()=>(
 
 const showSuccess=()=>(
    <div className="alert alert-info" style={{display:success?'':'none'}}>
-    Signup Successful
+    Signup Successful.You can now <Link to='/signin'>Signin</Link>
   </div>
 )
 
@@ -70,8 +57,8 @@ const showSuccess=()=>(
       {/* name */}
       <div className="form-group">
         <label className='text-muted'>Name</label>
-        <input className='form-control' type='text' onChange={handleChange('name')} value={name}/>
-        
+        <input className='form-control' type='text' onChange={handleChange('name')} value={name} />
+       
       </div>
       {/* email */}
       <div className="form-group">
@@ -92,7 +79,7 @@ return(
    {showSuccess()}
    {showError()}
   {signUpForm()}
-  {JSON.stringify(values)}
+  {/* {JSON.stringify(values)} */}
 </Layout>
 )
 }
