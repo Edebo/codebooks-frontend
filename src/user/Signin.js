@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import Layout from '../core/Layout'
 import {Redirect} from 'react-router-dom'
-import {signin,authenticate} from '../auth/index'
+import {signin,authenticate,isAuth} from '../auth/index'
 
 const Signin=() =>{
 const [values,setValues]=useState({
@@ -13,7 +13,7 @@ const [values,setValues]=useState({
 })
 
 const {email,password,error,loading,redirectToReferrer}=values
-
+const {user}=isAuth()
 
 
 const handleChange= name => event=>{
@@ -54,6 +54,12 @@ const showLoading=()=>(
 
 const redirectUser=()=>{
   if(redirectToReferrer){
+    if(user && user.role===1){
+      return <Redirect to='/admin/dashboard'/>
+    }
+    return <Redirect to='/user/dashboard'/>
+  }
+  if(isAuth()){
     return <Redirect to='/'/>
   }
 }

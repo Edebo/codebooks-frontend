@@ -13,7 +13,12 @@ const Menu=({history}) =>{
        <li className="nav-item">
            <Link className="nav-link" to='/' style={isActive(history,'/')}>Home</Link>
        </li>
-
+       <li className="nav-item">
+           <Link className="nav-link" to='/shop' style={isActive(history,'/shop')}>Shop</Link>
+       </li>
+     {isAuth()&& isAuth().user.role===1 && <li className="nav-item">
+           <Link className="nav-link" to='/admin/dashboard' style={isActive(history,'/admin/dashboard')}>Dashboard</Link>
+       </li>}
         {!isAuth()&&
         
         <Fragment>
@@ -27,13 +32,19 @@ const Menu=({history}) =>{
        </li>
         </Fragment>}
 
-      {isAuth() &&  <div >
-          
+        {isAuth()&& isAuth().user.role===0 &&
+        
+            <li className="nav-item">
+           <Link className="nav-link" to='/user/dashboard' style={isActive(history,'/user/dashboard')}>Dashboard</Link>
+       </li>}
+
+      {isAuth() &&  <Fragment>
+        
         <li className="nav-item">
            <span className="nav-link" onClick={()=>signout(()=>{
                history.push('/')})} style={{color:'#fff',cursor:'pointer'}}>Signout</span>
        </li>
-       </div>}
+       </Fragment>}
 
    </ul>
   )
