@@ -10,6 +10,8 @@ import AdminDashboard from './user/AdminDashboard'
 import AddCategory from './Admin/AddCategory'
 import AddProduct from './Admin/AddProduct'
 import Shop from './core/Shop'
+import Product from './core/Product'
+import Cart from './core/Cart'
 
 import './style.css'
 const Routes =()=>{
@@ -20,7 +22,9 @@ const Routes =()=>{
                 <Route path='/' exact component={Home}/>
                 <Route path='/shop' exact component={Shop}/>
                 <Route path='/signup' exact component={Signup}/>
-                <Route path='/signin' exact component={Signin}/>           
+                <Route path='/signin' exact component={Signin}/>    
+                <Route path='/cart' exact component={Cart}/>       
+                <Route path='/product/:productId' exact component={Product}/>              
                 <PrivateRoute path='/user/dashboard' exact component={Dashboard}/>
                 <AdminRoute path='/admin/dashboard' exact component={AdminDashboard}/>
                 <AdminRoute path='/create/category' exact component={AddCategory}/>

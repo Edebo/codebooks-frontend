@@ -13,6 +13,7 @@
     margin-top:-20px;
 }
 
+
 /*border-radius*/
 
 .btn,.jumbotron,nav :hover{
@@ -21,6 +22,32 @@
 
 .product-img{
     min-height:100px;
+}
+
+/* single product page */
+.name{
+    background:indigo;
+    color:white;
+    font-weight:bold;
+    
+}
+
+/* cart-badge */
+
+.cart-badge{
+    border-radius: 50%;
+    padding:3px 6px;
+    font-size: 12px;
+    font-style:italic;
+    background: red;
+    /* width: 14px;
+    height: 14px;
+    display: inline-block; */
+    color:white;
+  
+   
+  
+  
 }
 
 @media only screen and (max-width:600px){

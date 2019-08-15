@@ -18,6 +18,7 @@ const Shop = () => {
   const [error,setError]=useState('')
   const [limit,setLimit]=useState(6)
   const [skip,setSkip]=useState(0)
+  const [size,setSize]=useState(0)
   const [filteredResult,setFilteredResult]=useState([])
 
 
@@ -48,7 +49,8 @@ const Shop = () => {
                             newFilters.filters[filterBy]=handlePrice(filters)
                         }
                         //initially myfilters is empty.but will be update when user clicks
-                        loadFilterResult(newFilters)
+                        console.log(newFilters)
+                        loadFilterResult(newFilters.filters)
                         setMyFilters(newFilters)
           }
 
@@ -71,9 +73,36 @@ const Shop = () => {
               else{
                 console.log(data)
                 setFilteredResult(data.data)
+                setSize(data.size)
+                setSkip(0)
               }
             })
         }
+
+//load more is for pagination on react
+        const loadMoreResult=()=>{
+          let toSkip=skip+limit
+          getFilteredProduct(toSkip,limit,myFilters.filters).then(data=>{
+            if(data.error){
+              setError(data.error)
+            }
+            else{
+              console.log(data)
+              setFilteredResult([...filteredResult,...data.data])
+              setSize(data.size)
+              setSkip(toSkip)
+            }
+          })
+      }
+
+      const loadMoreButton=()=>{
+         
+         return (size>0 && size>=limit ?
+           <button onClick={loadMoreResult} className="btn btn-warning mb-5">Load more</button>
+           :null
+          )
+        
+      }
 
 
 
@@ -95,8 +124,16 @@ const Shop = () => {
             </div>
           </div>
           <div className="col-md-8">
-           
-           {JSON.stringify(filteredResult)}
+           <h2 className="mb-4">Product</h2>
+           <div className="row">
+                  {filteredResult.map((product,i)=>{
+                    return  <div className="col-md-4 mb-3" key={i}>
+             <Card  product={product}/>  
+       </div>
+                  })}
+           </div>
+           <hr/>
+           {loadMoreButton()}
             
           </div>
         </div>

@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Layout from './Layout'
 import {getProducts} from './apiCore'
 import Card from './Card'
+import Search from './Search'
 
 const Home=() =>{
 const [productBySell,setProductBySell]=useState([])
@@ -40,13 +41,15 @@ useEffect(()=>{
 },[])
   return (
     <Layout title="Home page" description="Node react E-commerce App" className="container">
-
+      <Search/>
       
       <h2 className="mb-4"> New Arrival</h2>
         <div className="row">
         
       {productByArrival.map((product,i)=>{
-       return <Card key={i} product={product}/>
+       return <div className="col-md-4 mb-3" key={i}>
+             <Card  product={product}/>  
+       </div>
       })}
       </div>
       
@@ -55,7 +58,9 @@ useEffect(()=>{
 
       <div className='row'>
           {productBySell.map((product,i)=>{
-        return   <Card key={i} product={product}/>
+        return   <div className="col-md-4 mb-3" key={i}>
+             <Card  product={product}/>  
+       </div>
           })}
       </div>
      
