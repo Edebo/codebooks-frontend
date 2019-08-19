@@ -1,3 +1,6 @@
+body{
+  background-color: rgba(220,220,220,0.2);
+}
 .jumbotron {
     width: 30wh;
     height: 30vh;
@@ -7,6 +10,7 @@
     -webkit-animation: Gradient 15s ease infinite;
     -moz-animation: Gradient 15s ease infinite;
     animation: Gradient 15s ease infinite;
+  
 }
 
 .jumbotron h2{
@@ -33,6 +37,15 @@
     
 }
 
+.card{
+  transition:0.4s ease;
+}
+
+.card:hover{
+  -webkit-box-shadow: -2px 8px 46px 7px rgba(0,0,0,0.13);
+-moz-box-shadow: -2px 8px 46px 7px rgba(0,0,0,0.13);
+box-shadow: -2px 8px 46px 7px rgba(0,0,0,0.13);
+}
 /* cart-badge */
 
 .cart-badge{
@@ -44,13 +57,13 @@
     /* width: 14px;
     height: 14px;
     display: inline-block; */
-    color:white;
-  
-   
-  
-  
+    color:white; 
 }
 
+.related{
+  margin-top:-3em;
+  margin-bottom: 2em;
+}
 @media only screen and (max-width:600px){
     .jumbotron h2{
         margin-top: 10px;
@@ -161,3 +174,4 @@
       transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
     }
   }
+

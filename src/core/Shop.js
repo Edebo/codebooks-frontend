@@ -110,7 +110,7 @@ const Shop = () => {
    <Layout title="Shop" description="Search and find book of your choice" className="container-fluid">
 
       
-        <div className="row">
+        <div className="row pt-5">
           <div className="col-md-4 mb-4">
             <h4>Filter by categories</h4>
             <ul>

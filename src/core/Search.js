@@ -101,7 +101,7 @@ const Search = () => {
                             
                 </div>
                 <div className="input-group-append" style={{border:'none'}}>
-                    <button className="input-group-text">
+                    <button className="input-group-text btn btn-success">
                         Search
                     </button>
                 </div>
@@ -115,7 +115,7 @@ const Search = () => {
         loadCategories()
     },[])
   return (
-    <div className='row'>
+    <div className='row pt-5'>
      <div className='container'>
          {searchForm()}
          

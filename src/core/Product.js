@@ -41,14 +41,14 @@ const Product = (props) => {
 
   return (
       <Layout title={product && product.name} description={product && product.description && product.description.substring(0,100)} className="container">
-      <h2 className="mb-4">A Single Product page</h2>
+      <h2 className="mb-4 pt-5">A Single Product page</h2>
       
         
             <div className="row">
             <div className="col-8">
                   <Card product={product} showViewProductButton={false}/>
               </div>
-              <div className="col-4">
+              <div className="col-4 related mb-4">
                 <h2>Related Product{+ relatedProduct.length>1?'s':''}</h2>
                 { relatedProduct.map((product,i)=>{
                     return <Card product={product} key={i}/>

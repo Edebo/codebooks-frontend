@@ -14,7 +14,10 @@ const Layout=({title ='Title', description='Description',className,children}) =>
         </div>
         
         <div className={className}>
-            {children}
+          
+              {children}
+        
+           
         </div>   
    </div>
   )

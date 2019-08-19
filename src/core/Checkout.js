@@ -69,7 +69,7 @@ const Checkout = ({products}) => {
             address:data.address
           }
           createOrder(userId,token,orderData)
-          setData({...data,success:response.success})
+          setData({...data,success:true})
 
            emptyCart(()=>{
              console.log('payment successfull and cart is empty')
