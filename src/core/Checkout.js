@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import {isAuth } from '../auth'
 import {Link} from 'react-router-dom'
-import {getClientToken,processPayment} from './apiCore'
+import {getClientToken,processPayment,createOrder} from './apiCore'
 import DropIn from "braintree-web-drop-in-react";
 import {emptyCart} from './Carthelper'
 
@@ -30,7 +30,7 @@ const Checkout = ({products}) => {
         }
         console.log(data.clientToken)
         setData({clientToken:data.clientToken})
-        setData({...data,loading:false})
+       
       })
 
     }
@@ -38,9 +38,9 @@ const Checkout = ({products}) => {
 
     useEffect(()=>{
       console.log(userId)
-      setData({...data,loading:true})
+     
       getToken(userId,token)
-
+      setData({...data,success:false})
     },[])
 
 
@@ -48,7 +48,7 @@ const Checkout = ({products}) => {
       //send nounce
       setData({...data,loading:true})
     let nonce;
-    data.instance.requestPaymentMethod().then(data=>{
+    let getNonce=data.instance.requestPaymentMethod().then(data=>{
       console.log(data)
       nonce=data.nonce
 
@@ -58,9 +58,17 @@ const Checkout = ({products}) => {
         paymentMethodNonce:nonce,
         amount:getTotal()
       }
-        processPayment(userId,token,paymentData)
+       processPayment(userId,token,paymentData)
         .then(response=>{
+
           setData({loading:false})
+          const orderData={
+            products,
+            transaction_id:response.transaction_id,
+            amount:response.transaction.amount,
+            address:data.address
+          }
+          createOrder(userId,token,orderData)
           setData({...data,success:response.success})
 
            emptyCart(()=>{
@@ -74,10 +82,23 @@ const Checkout = ({products}) => {
      setData({...data,error})
     })
     }
+
+    const handleAddress=(event)=>{
+          setData({...data,address:event.target.value})
+    }
     const showDropIn=()=>{
     
        {return data.clientToken!==null && products.length>0?(
         <div> 
+
+          <div className="form-group mb-3">
+            <label  className="text-muted">Delivery Address:</label>
+            <textarea 
+              placeholder='Type your delivery address here' 
+              className="form-control"
+              value={data.address}
+              onChange={handleAddress}></textarea>
+          </div>
           <DropIn 
              options={{ authorization: data.clientToken ,
                       paypal:{
@@ -117,6 +138,7 @@ const Checkout = ({products}) => {
     }
 
     const showSuccess=(success)=>{
+  
       return <div className="alert alert-info" style={{'display':success?'':'none'}}>Thanks! you payment is successful</div>
   }
 

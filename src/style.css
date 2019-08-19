@@ -21,14 +21,15 @@
 }
 
 .product-img{
-    min-height:100px;
+    min-height:80px;
 }
 
 /* single product page */
 .name{
-    background:indigo;
+    background:#d0f8ef;
     color:white;
     font-weight:bold;
+    color:#16385c;
     
 }
 
