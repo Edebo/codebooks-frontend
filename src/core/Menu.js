@@ -8,6 +8,7 @@ const isActive=(history,path)=>{
     return history.location.pathname===path ? {'color':'#ff9900'} : {'color':'white'}
     
 }
+
 const Menu=({history}) =>{
   return (
    <ul className="nav nav-tabs bg-primary">

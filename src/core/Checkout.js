@@ -19,6 +19,8 @@ const Checkout = ({products}) => {
     const userId=isAuth() && isAuth().user._id
     const token=isAuth() && isAuth().token
 
+    let deliveryAddress=data.address
+
     const getToken=(userId,token)=>{
 
       getClientToken(userId,token).then(data=>{
@@ -66,7 +68,7 @@ const Checkout = ({products}) => {
             products,
             transaction_id:response.transaction_id,
             amount:response.transaction.amount,
-            address:data.address
+            address:deliveryAddress
           }
           createOrder(userId,token,orderData)
           setData({...data,success:true})
