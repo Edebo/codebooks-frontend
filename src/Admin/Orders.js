@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import {listOrders,getStatusValues} from './apiAdmin'
+import {listOrders,getStatusValues,updateStatus} from './apiAdmin'
 import {isAuth} from '../auth'
 import {Link} from 'react-router-dom'
 import Layout from '../core/Layout'
@@ -53,7 +53,15 @@ const Orders = () => {
     }
 
     const handleStatusChange=(e,id)=>{
-        console.log(e)
+        updateStatus(userId,token,id,e.target.value).then(data=>{
+            if(data.error){
+                console.log('status updat failed')
+            }
+            getOrders()
+
+        }).catch(err=>{
+
+        })
     }
 
     const showStatus=(order)=>{
