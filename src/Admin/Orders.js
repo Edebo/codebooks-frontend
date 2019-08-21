@@ -53,13 +53,13 @@ const Orders = () => {
     }
 
     const handleStatusChange=(e,id)=>{
-
+        console.log(e)
     }
 
     const showStatus=(order)=>{
         return <div className="form-group">
             <h3 className="mark">Status:{order.status}</h3>
-            <select onChange={()=>handleStatusChange(e,order._id)} className="form-control">
+            <select onChange={()=>handleStatusChange(order._id)} className="form-control">
                 <option>Update Status</option>
                 {statusValues.map((status,i)=>{
                   return  <option key={i} value={status}>{status}</option>
@@ -89,7 +89,7 @@ const Orders = () => {
 
                         <ul className="list-group">
                             <li className="list-group-item">
-                               Status :{showStatus(order.status)}
+                               Status :{showStatus(order)}
                             </li>
                             <li className="list-group-item">
                              Transaction Id:{order.transaction_id}

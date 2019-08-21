@@ -11,6 +11,7 @@ const isActive=(history,path)=>{
 
 const Menu=({history}) =>{
   return (
+   <div>
    <ul className="nav nav-tabs bg-primary">
        <li className="nav-item">
            <Link className="nav-link" to='/' style={isActive(history,'/')}>Home</Link>
@@ -54,6 +55,7 @@ const Menu=({history}) =>{
        </Fragment>}
 
    </ul>
+   </div>
   )
 }
 
