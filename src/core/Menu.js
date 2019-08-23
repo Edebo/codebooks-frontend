@@ -1,4 +1,4 @@
-import React ,{Fragment} from 'react'
+import React ,{useState,useEffect,Fragment} from 'react'
 import {Link,withRouter} from 'react-router-dom'
 import {signout,isAuth} from '../auth'
 import {getTotalItems} from './Carthelper'
@@ -10,10 +10,29 @@ const isActive=(history,path)=>{
 }
 
 const Menu=({history}) =>{
+    const [isScrolled,setIsScrolled]=useState(false)
+    const notScrolled="navbar navbar-expand-lg sticky-top navbar-light bg-primary"
+    useEffect(()=>{
+
+        window.addEventListener('scroll',()=>{          
+            if(window.scrollY>100){
+                setIsScrolled(true)
+            }
+            else{
+                setIsScrolled(false)
+            }
+        })
+    })
   return (
-   <div>
-   <ul className="nav nav-tabs bg-primary">
-       <li className="nav-item">
+
+   <nav className={isScrolled? `${notScrolled} scrolledNavbar`:notScrolled}>
+                <Link className="navbar-brand" to="/">CodeBooks</Link>
+  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span className="navbar-toggler-icon"></span>
+  </button>
+  <div className="collapse navbar-collapse" id="navbarNav">
+    <ul className="nav navbar-nav ml-auto">
+      <li className="nav-item">
            <Link className="nav-link" to='/' style={isActive(history,'/')}>Home</Link>
        </li>
        <li className="nav-item">
@@ -54,8 +73,9 @@ const Menu=({history}) =>{
        </li>
        </Fragment>}
 
-   </ul>
-   </div>
+    </ul>
+    </div>
+    </nav>
   )
 }
 

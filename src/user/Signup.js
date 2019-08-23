@@ -53,29 +53,34 @@ const showSuccess=()=>(
 )
 
   const signUpForm=()=>(
+
+    <div className="wrapper fadeInDown w-md-50 my-5">
+    <h2 className= "my-2 text-muted">SignUp</h2>
     <form>
-      {/* name */}
+     
       <div className="form-group">
         <label className='text-muted'>Name</label>
-        <input className='form-control' type='text' onChange={handleChange('name')} value={name} />
+        <input className='form-control fadeIn first my-1' type='text' onChange={handleChange('name')} value={name} />
        
       </div>
       {/* email */}
       <div className="form-group">
         <label className='text-muted'>Email</label>
-        <input className='form-control' type='Email' onChange={handleChange('email')} value={email}/>
+        <input className='form-control fadeIn second my-1' type='Email' onChange={handleChange('email')} value={email}/>
       </div>
 
       <div className="form-group">
         <label className='text-muted'>password</label>
-        <input className='form-control' type='password' onChange={handleChange('password')} password={password}/>
+        <input className='form-control fadeIn third my-1' type='password' onChange={handleChange('password')} password={password}/>
       </div>
       <button onClick={clickSubmit} className='btn btn-primary'>Sign Up</button>
     </form>
+    </div>
+   
 
   )
 return(
- <Layout title="Signup" description="Node react E-commerce App" className='container col-md-8 offset-2'>
+ <Layout title="Signup" description="Node react E-commerce App" className='container col-md-6 offset-md-3'>
    {showSuccess()}
    {showError()}
   {signUpForm()}

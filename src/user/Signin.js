@@ -65,52 +65,28 @@ const redirectUser=()=>{
 }
   const signInForm=()=>(
 
-     <div className="wrapper fadeInDown">
+     <div className="wrapper fadeInDown w-40 my-5">
+       <h2 className= "my-2 text-muted">SignIn</h2>
      <form>
       
       <div className="form-group">
         <label className='text-muted'>Email</label>
-        <input className='form-control fadeIn second' type='Email' onChange={handleChange('email')} value={email}/>
+        <input className='form-control fadeIn second my-1' type='Email' onChange={handleChange('email')} value={email}/>
       </div>
 
       <div className="form-group">
-        <label className='text-muted'>password</label>
-        <input className='form-control fadeIn third' type='password' onChange={handleChange('password')} password={password}/>
+        <label className='text-muted'>Password</label>
+        <input className='form-control fadeIn third my-1' type='password' onChange={handleChange('password')} password={password}/>
       </div>
-      <button onClick={clickSubmit} className='btn btn-primary'>Sign In</button>
+      <button onClick={clickSubmit} className='btn btn-primary signin'>Sign In</button>
     </form>
 
      </div>
    
   )
 
-//   const login=()=>{
-//     <div className="wrapper fadeInDown">
-//   <div id="formContent">
-   
-
-  
-//     <div className="fadeIn first">
-//       <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-//     </div>
-
-   
-//     <form>
-//       <input type="text" id="login" className="fadeIn second" name="login" placeholder="login">
-//       <input type="text" id="password" className="fadeIn third" name="login" placeholder="password">
-//       <input type="submit" className="fadeIn fourth" value="Log In">
-//     </form>
-
-
-//     <div id="formFooter">
-//       <a class="underlineHover" href="#">Forgot Password?</a>
-//     </div>
-
-//   </div>
-// </div>
-//   }
 return(
- <Layout title="Signin" description="Node react E-commerce App" className='container col-md-8 offset-2'>
+ <Layout title="Signin" description="Node react E-commerce App" className='container col-md-6 offset-md-3'>
    {showLoading()}
    {showError()}
   {signInForm()}
