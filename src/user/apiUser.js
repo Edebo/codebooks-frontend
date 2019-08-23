@@ -40,6 +40,23 @@ export const readUser=(userId,token)=>{
             let auth=JSON.parse(localStorage.getItem('jwt'))
             auth.user=user
             localStorage.setItem('jwt',JSON.stringify(auth))
+            next()
         }
     }
+  }
+
+  export const getPurchaseHistory=(userId,token)=>{
+    return fetch(`${API}/user/orders/${userId}`,{
+      method:"GET",
+      headers:{
+        Accept:"application/json",
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}` 
+      }
+     
+    }).then(response=>{
+      return response.json()
+    }).catch(error=>{
+      console.log(error)
+    })
   }

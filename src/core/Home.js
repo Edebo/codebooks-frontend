@@ -15,8 +15,8 @@ const loadProductsBySell=()=>{
       setError(data.error)
     }
     else{
-      
-      setProductBySell(data.products)
+      console.log(data)
+      setProductBySell(data)
     }
   })
 }
@@ -29,7 +29,7 @@ const loadProductsByArrival=()=>{
     }
     else{
       console.log(data)
-      setProductByArrival(data.products)
+      setProductByArrival(data)
     }
   })
 }
@@ -46,7 +46,7 @@ useEffect(()=>{
       <h2 className="mb-4"> New Arrival</h2>
         <div className="row">
         
-      {productByArrival.map((product,i)=>{
+      {productByArrival && productByArrival.map((product,i)=>{
        return <div className="col-md-4 mb-3" key={i}>
              <Card  product={product}/>  
        </div>
@@ -57,7 +57,7 @@ useEffect(()=>{
     <h2 className="mb-4"> Best Seller</h2>
 
       <div className='row'>
-          {productBySell.map((product,i)=>{
+          { productBySell.map((product,i)=>{
         return   <div className="col-md-4 mb-3" key={i}>
              <Card  product={product}/>  
        </div>

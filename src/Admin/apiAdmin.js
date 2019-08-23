@@ -101,3 +101,53 @@ export const createCategory=(userId,token,category)=>{
       console.log(error)
     })
   }
+
+
+
+  export const getProducts=()=>{
+    return fetch(`${API}/products/`,{
+      method:"GET",
+      headers:{
+        Accept:"application/json",
+        "Content-Type":"application/json"
+      }
+    }).then(response=>{
+      return response.json()
+    }).catch(error=>{
+      console.log(error)
+    })
+  }
+
+
+  export const updateProduct=(userId,token,productId,product)=>{
+    return fetch(`${API}/product/${productId}/status/${userId}`,{
+      method:"PUT",
+      headers:{
+        Accept:"application/json",
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}` 
+      },
+      body:product
+
+    }).then(response=>{
+      return response.json()
+    }).catch(error=>{
+      console.log(error)
+    })
+  }
+
+  export const deleteProduct=(userId,token,productId)=>{
+    return fetch(`${API}/product/${productId}/${userId}?limit=undefined`,{
+      method:"DELETE",
+      headers:{
+        Accept:"application/json",
+        "Content-Type":"application/json",
+        "Authorization":`Bearer ${token}` 
+      }
+
+    }).then(response=>{
+      return response.json()
+    }).catch(error=>{
+      console.log(error)
+    })
+  }
